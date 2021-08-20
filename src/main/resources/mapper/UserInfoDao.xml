@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao">
+    <select id="queryUserByAccount" resultType="com.example.demo.entity.User">
+        SELECT User_account,User_password,User_name,User_age,User_gender
+        FROM
+        Users
+        WHERE
+        User_account=#{0}
+    </select>
+    <select id="queryAllUsers" resultType="com.example.demo.entity.User">
+        SELECT User_account,User_password,User_name,User_age,User_gender
+        FROM
+        Users
+    </select>
+<!--    <resultMap id="userOrderResultMap" type="com.imooc.demo.entity.User">-->
+<!--        <id property="userAccount" column="User_account"></id>-->
+<!--        <result property="userName" column="User_name"></result>-->
+<!--        <result property="userAge" column="User_age"></result>-->
+<!--        <result property="userGender" column="User_gender"></result>-->
+
+<!--        <collection property="orders" javaType="list" ofType="com.imooc.demo.entity.Order">-->
+<!--            <id property="orderId" column="Order_id"></id>-->
+<!--            <result property="createTime" column="Create_time"></result>-->
+<!--            <result property="isFinished" column="Is_finished"></result>-->
+<!--        </collection>-->
+
+<!--    </resultMap>-->
+<!--    <select id="getUsersOrders" resultMap="userOrderResultMap">-->
+<!--        SELECT-->
+<!--        u.User_account,-->
+<!--        u.User_name,-->
+<!--        u.User_age,-->
+<!--        u.User_gender,-->
+<!--        o.Order_id,-->
+<!--        o.Create_time,-->
+<!--        o.Is_finished-->
+<!--        FROM-->
+<!--        user_info u-->
+<!--        LEFT JOIN order_info o ON u.User_account = o.User_account-->
+<!--    </select>-->
+    <insert id="addUser" keyColumn="User_account"
+            keyProperty="userAccount" useGeneratedKeys="true">
+        INSERT INTO
+        Users
+        (User_account,User_password,User_name,User_age,User_gender)
+        VALUES(#{userAccount},#{userPassword},#{userName},#{userAge},#{userGender})
+    </insert>
+    <delete id="deleteUser">
+        DELETE FROM
+        Users
+        WHERE
+        User_account=
+        #{userAccount}
+    </delete>
+</mapper>

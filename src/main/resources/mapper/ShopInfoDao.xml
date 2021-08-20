@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ShopDao">
+    <select id="queryAllShops" resultType="com.example.demo.entity.Shop">
+        SELECT Shop_id , Shop_name FROM
+        Shops;
+    </select>
+    <select id="queryshopById" resultType="com.example.demo.entity.Shop">
+        SELECT Shop_id , Shop_name FROM
+        Shops
+        WHERE
+        Shop_id=#{0}
+        ;
+    </select>
+    <insert id="addShop" useGeneratedKeys="true" keyProperty="shopId"
+            keyColumn="Shop_id" parameterType="com.example.demo.entity.Shop">
+        INSERT INTO
+            Shops(Shop_name)
+        Values
+            (#{shopName})
+    </insert>
+</mapper>

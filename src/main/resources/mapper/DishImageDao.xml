@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.DishImageDao">
+    <select id="queryImagesByDishId" resultType="com.example.demo.entity.DishImage">
+        select Image_id,Image_addr,Dish_id,Shop_id
+        from DishImages
+        where Dish_id=#{0}
+    </select>
+    <select id="queryAllDishImages" resultType="com.example.demo.entity.DishImage">
+        select Image_id,Image_addr,Dish_id,Shop_id
+        from DishImages
+    </select>
+    <select id="queryAllDishImagesOfShop" resultType="com.example.demo.entity.DishImageVO">
+        select DishImages.Image_id,DishImages.Image_addr,DishImages.Dish_id,DishImages.Shop_id,Dishes.Dish_name,Dishes.Dish_price
+        from DishImages,Dishes
+        where DishImages.Shop_id=#{0} and DishImages.Dish_id=Dishes.Dish_id
+    </select>
+    <insert id="insertDishImage" useGeneratedKeys="true" keyProperty="imageId"
+            keyColumn="Image_id" parameterType="com.example.demo.entity.DishImage">
+        INSERT INTO
+            DishImages(Image_addr,Dish_id,Shop_id)
+        VALUES
+--         用实体类里属性的名字取值
+        (#{imageAddr},#{dishId},#{shopId})
+    </insert>
+<!--    <select id=""-->
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.DishDao">
+    <select id="queryAllDishes" resultType="com.example.demo.entity.Dish">
+        SELECT Dish_id,Dish_name,Dish_price,Dish_isAvaliable,Owned_shop
+        FROM
+        Dishes
+
+    </select>
+    <select id="queryDishesByShopId" resultType="com.example.demo.entity.Dish">
+        SELECT Dish_id,Dish_name,Dish_price,Dish_isAvaliable,Owned_shop
+        FROM
+        Dishes
+        WHERE
+        Owned_shop=#{0};
+
+    </select>
+    <select id="queryAvaliableDishes" resultType="com.example.demo.entity.Dish">
+        SELECT Dish_id,Dish_name,Dish_price,Dish_isAvaliable,Owned_shop
+        FROM
+            Dishes
+        WHERE
+            Owned_shop=#{0} AND Dish_isAvaliable=1;
+    </select>
+    <insert id="addDish" useGeneratedKeys="true" keyProperty="dishId"
+            keyColumn="Dish_id" parameterType="com.example.demo.entity.Dish">
+        INSERT INTO
+        Dishes(Dish_name,Dish_price,Owned_shop)
+        Values
+        (#{dishName},#{dishPrice},#{ownedShop})
+    </insert>
+
+</mapper>

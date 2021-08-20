@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ShopImageDao">
+    <select id="queryAllShopImages" resultType="com.example.demo.entity.ShopImage">
+        SELECT Image_id,Image_Addr,Owned_shop
+        FROM
+        ShopImages
+    </select>
+    <select id="queryImageByShopid" resultType="com.example.demo.entity.ShopImage">
+        SELECT Image_id,Image_Addr,Owned_shop
+        FROM
+        ShopImages
+        WHERE Owned_shop = #{0}
+    </select>
+    <insert id="insertShopImage" useGeneratedKeys="true" keyProperty="imageId"
+            keyColumn="Image_id" parameterType="com.example.demo.entity.ShopImage">
+        INSERT INTO
+            ShopImages(Image_addr,Owned_shop)
+        VALUES
+--         用实体类里属性的名字取值
+    (#{imageAddr},#{ownedShop})
+    </insert>
+
+</mapper>
